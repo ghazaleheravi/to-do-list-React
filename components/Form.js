@@ -1,35 +1,47 @@
 import React, { useState } from 'react';
 
-export default function Form(props) {
-  console.log(props)
-  const [submit, setSubmit] = useState(''); 
 
-  setSubmit() {
-    if (submit !== '') {
-      <Todo name={submit}/>
-    }
+function Form(props) {
+  console.log(props)
+  const [name, setName] = useState(''); 
+  
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.addTask(name);
+  }  
+
+  function handleChange(e) {
+    console.log('typing!');   //showing event Listener is attached to the input
+    setName(e.target.value);
+
+    console.log('input-value:', e.target.value);
+    console.log('name:',name);
   }
+  
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2 className="label-wrapper">
-        <label htmlFor={props.id} className="label__lg">
+        <label htmlFor="new-todo-input" className="label__lg">
           What needs to be done?
         </label>
       </h2>  
       <input 
-        id={props.id} 
+        id="new-todo-input" 
         type="text" 
         className="input input__lg" 
         autoComplete="off"
+        value={name}       //using state hooks to give input changeable value!
+        onChange={handleChange}
       />
       <button 
         type="submit" 
         className="btn btn__primary btn__lg" 
-        onSubmit={() => setSubmit()}
       >
         Add
       </button>  
     </form>
   );
 }
+
+export default Form;

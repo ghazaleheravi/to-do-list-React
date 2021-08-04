@@ -1,13 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 import Todo from './components/Todo';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
 
-function App(props) {
-  console.log(props);
 
-  const taskList = props.tasks.map((task) => 
+function App(props) {
+ // console.log(props);
+  const taskList = props.tasks.map(task => 
     <Todo 
       name={task.name}
       completed={task.completed}
@@ -16,12 +15,17 @@ function App(props) {
     />
   ); 
 
+  function addTask(name) {
+    alert(name);
+  } 
+
   return (
     <div className="todoapp stack-large">
       <h1>To-Do List</h1>
-      <Form id="new-todo-input"/>  
+      <Form addTask={addTask} />  
       
       <div className="filters btn-group stack-exception">
+        <FilterButton />
         <button type="button" className="btn toggle-btn" aria-pressed="true">
           <span className="visually-hidden">show</span>
           <span>all</span>

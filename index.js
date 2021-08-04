@@ -11,7 +11,7 @@ const DATA = [
 ] 
 
 ReactDOM.render(
-  <App tasks={DATA}/>,
+  <App tasks={DATA} />,
   document.getElementById('root')
 );
 
