@@ -16,7 +16,8 @@ function App(props) {
   ); 
 
   function addTask(name) {
-    if (name === '') {
+    // to disallow empty tasks from being added
+    if (name === '') {           
       alert('please fill out what you need to be done!');
     } else {
       alert(name);
