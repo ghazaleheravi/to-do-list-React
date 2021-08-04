@@ -4,21 +4,21 @@ import React, { useState } from 'react';
 function Form(props) {
   console.log(props)
   const [name, setName] = useState(''); 
-  
-  function handleSubmit(e) {
-    e.preventDefault();
-    props.addTask(name);
-  }  
-
+   
   function handleChange(e) {
     console.log('typing!');   //showing event Listener is attached to the input
     setName(e.target.value);
-
+    
     console.log('input-value:', e.target.value);
     console.log('name:',name);
   }
-  
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.addTask(name);
+    setName('');
+  } 
+  
   return (
     <form onSubmit={handleSubmit}>
       <h2 className="label-wrapper">

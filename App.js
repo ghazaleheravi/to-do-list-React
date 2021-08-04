@@ -16,7 +16,11 @@ function App(props) {
   ); 
 
   function addTask(name) {
-    alert(name);
+    if (name === '') {
+      alert('please fill out what you need to be done!');
+    } else {
+      alert(name);
+      }
   } 
 
   return (
