@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-
 function Form(props) {
-  console.log(props)
+  //console.log(props)
   const [name, setName] = useState(''); 
    
   function handleChange(e) {
-    console.log('typing!');   //showing event Listener is attached to the input
+    //showing event Listener is attached to the input
+    console.log('typing!');   
     setName(e.target.value);
     
     console.log('input-value:', e.target.value);

@@ -8,16 +8,32 @@ import { nanoid } from 'nanoid';
 function App(props) {
   // console.log(props);
   const [tasks, setTasks] = useState(props.tasks);
-  console.log('tasks:' , tasks);
+  //console.log('tasks:' , tasks);
 
   function toggleTaskCompleted(id) {
     const updateTasks = tasks.map(task => {
       if (task.id === id) {
-        return {...task, completed: !task.completed};
+        //task.completed = !task.completed /why we have to create new object?
+        return {...task, completed: !task.completed};  
       }
       return task;
     });
     setTasks(updateTasks);
+  }
+
+  function deleteTask(id) {
+    const remainingTask = tasks.filter(task => id !== task.id);
+    setTasks(remainingTask);
+  }
+
+  function editTask(id, newName) {
+    const editingTask = tasks.map(task => {
+      if(id === task.id) {
+        return {...task, name: newName}
+      }
+      return task;
+    });
+    setTasks(editingTask);
   }
 
   const taskList = tasks.map(task => 
@@ -27,6 +43,8 @@ function App(props) {
       id={task.id} 
       key={task.key}
       toggleTaskCompleted={toggleTaskCompleted}
+      deleteTask={deleteTask}
+      editTask={editTask}
     />
   ); 
   console.log('taskList:', taskList);
