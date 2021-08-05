@@ -2,27 +2,46 @@ import './App.css';
 import Todo from './components/Todo';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
-
+import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
 
 function App(props) {
- // console.log(props);
-  const taskList = props.tasks.map(task => 
+  // console.log(props);
+  const [tasks, setTasks] = useState(props.tasks);
+  console.log('tasks:' , tasks);
+
+  function toggleTaskCompleted(id) {
+    const updateTasks = tasks.map(task => {
+      if (task.id === id) {
+        return {...task, completed: !task.completed};
+      }
+      return task;
+    });
+    setTasks(updateTasks);
+  }
+
+  const taskList = tasks.map(task => 
     <Todo 
       name={task.name}
       completed={task.completed}
       id={task.id} 
       key={task.key}
+      toggleTaskCompleted={toggleTaskCompleted}
     />
   ); 
+  console.log('taskList:', taskList);
 
   function addTask(name) {
     // to disallow empty tasks from being added
     if (name === '') {           
       alert('please fill out what you need to be done!');
     } else {
-      alert(name);
+      //using nanoid libarary to create unique ids
+      const newTask = {name: name, id: 'todo-'+ nanoid(), completed: false}
+      setTasks([...tasks, newTask]);
       }
   } 
+  
 
   return (
     <div className="todoapp stack-large">
@@ -48,7 +67,7 @@ function App(props) {
         </button>
       </div>
       <h2 id="list-heading">
-        3 tasks remainig
+        {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'} remainig    
       </h2>
   
       <ul 
